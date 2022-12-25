@@ -1,6 +1,11 @@
+import 'package:clean_arc_bloc/core/usecases/usecases.dart';
+
 import '../../../../core/error/failure.dart';
 import 'package:dartz/dartz.dart';
 
-abstract class RickAndMorty {
-  Future<Either<Failure, List<RickAndMorty>>> getRickAndMortyList();
+import '../entity/rick_and_morty.dart';
+
+abstract class RickAndMortyRepository {
+  Future<Either<Failure, List<RickAndMorty>>> getRickAndMortyList(
+      Params params);
 }

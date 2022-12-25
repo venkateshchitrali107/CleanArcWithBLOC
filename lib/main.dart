@@ -1,3 +1,5 @@
+import 'package:clean_arc_bloc/app/home/domain/usecases/get_rick_and_morty_list.dart';
+import 'package:clean_arc_bloc/core/usecases/usecases.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -30,6 +32,20 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   int _counter = 0;
+  @override
+  void initState() {
+    super.initState();
+    getData();
+  }
+
+  getData() async {
+    final data = await GetRickAndMortyList().call(
+      Params(
+        pageNumber: 2,
+      ),
+    );
+    data.fold((l) => print("error"), (r) => print(r.length));
+  }
 
   void _incrementCounter() {
     setState(() {

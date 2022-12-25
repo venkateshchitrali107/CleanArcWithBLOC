@@ -1,14 +1,15 @@
-import '../error/failure.dart';
 import 'package:dartz/dartz.dart';
 import 'package:equatable/equatable.dart';
 
-abstract class Usecases<Type, Params> {
-  Future<Either<Failure, Type>> call(Params params);
+import '../error/failure.dart';
+
+abstract class Usecases<Type, Param> {
+  Future<Either<Failure, Type>> call(Param param);
 }
 
 class Params extends Equatable {
   final int pageNumber;
-  const Params({
+  Params({
     required this.pageNumber,
   });
 
