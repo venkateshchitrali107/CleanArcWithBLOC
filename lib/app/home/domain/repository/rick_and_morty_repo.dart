@@ -7,5 +7,6 @@ import '../entity/rick_and_morty.dart';
 
 abstract class RickAndMortyRepository {
   Future<Either<Failure, List<RickAndMorty>>> getRickAndMortyList(
-      Params params);
+    Params params,
+  );
 }

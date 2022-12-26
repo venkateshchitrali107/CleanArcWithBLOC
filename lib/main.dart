@@ -1,8 +1,12 @@
 import 'package:clean_arc_bloc/app/home/domain/usecases/get_rick_and_morty_list.dart';
 import 'package:clean_arc_bloc/core/usecases/usecases.dart';
+import 'package:clean_arc_bloc/dependency_container.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'dependency_container.dart' as dc;
 
 void main() {
+  dc.init();
   runApp(const MyApp());
 }
 
@@ -39,12 +43,16 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 
   getData() async {
-    final data = await GetRickAndMortyList().call(
-      Params(
-        pageNumber: 2,
-      ),
-    );
-    data.fold((l) => print("error"), (r) => print(r.length));
+    try {
+      final data = await serviceLocator<GetRickAndMortyList>().call(
+        Params(
+          pageNumber: 2,
+        ),
+      );
+      data.fold((l) => print("error"), (r) => print(r.length));
+    } catch (e) {
+      if (kDebugMode) print(e.toString());
+    }
   }
 
   void _incrementCounter() {

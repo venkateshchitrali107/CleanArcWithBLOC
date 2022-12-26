@@ -1,7 +1,6 @@
-import 'package:clean_arc_bloc/core/usecases/usecases.dart';
+import '../../../../core/usecases/usecases.dart';
 
 import '../datasource/remote_datasource.dart';
-import '../../../../core/error/exceptions.dart';
 import 'package:dartz/dartz.dart';
 
 import '../../../../core/error/failure.dart';
@@ -12,7 +11,9 @@ import 'package:flutter/foundation.dart';
 import '../../domain/repository/rick_and_morty_repo.dart';
 
 class RickAndMortyRepositoryImpl implements RickAndMortyRepository {
-  final dataSource = RemoteDatasourceImpl();
+  final RemoteDatasourceImpl dataSource;
+  RickAndMortyRepositoryImpl(this.dataSource);
+
   @override
   Future<Either<Failure, List<RickAndMorty>>> getRickAndMortyList(
       Params params) async {

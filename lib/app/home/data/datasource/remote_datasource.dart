@@ -1,3 +1,5 @@
+import 'package:flutter/foundation.dart';
+
 import '../../../../core/usecases/usecases.dart';
 import '../model/rick_and_morty_model.dart';
 import '../../domain/entity/rick_and_morty.dart';
@@ -38,7 +40,7 @@ class RemoteDatasourceImpl implements RemoteDatasource {
       }
       return decodedList;
     } catch (e) {
-      print(e.toString());
+      if (kDebugMode) print(e.toString());
       throw ServerFailure();
     }
   }
