@@ -1,5 +1,6 @@
-import 'package:clean_arc_bloc/app/home/data/datasource/remote_datasource.dart';
-import 'package:clean_arc_bloc/app/home/domain/usecases/get_rick_and_morty_list.dart';
+import 'app/home/data/datasource/remote_datasource.dart';
+import 'app/home/domain/usecases/get_rick_and_morty_list.dart';
+import 'app/home/presentation/bloc/rick_and_morty_bloc.dart';
 import 'package:flutter/foundation.dart';
 import 'package:get_it/get_it.dart';
 
@@ -21,6 +22,11 @@ void init() {
     serviceLocator.registerFactory(
       () => GetRickAndMortyList(
         serviceLocator<RickAndMortyRepositoryImpl>(),
+      ),
+    );
+    serviceLocator.registerFactory(
+      () => RickAndMortyBLOC(
+        serviceLocator<GetRickAndMortyList>(),
       ),
     );
   } catch (e) {

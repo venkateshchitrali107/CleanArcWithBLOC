@@ -1,10 +1,10 @@
 import 'package:flutter/foundation.dart';
-
-import '../../../../core/usecases/usecases.dart';
-import '../model/rick_and_morty_model.dart';
-import '../../domain/entity/rick_and_morty.dart';
-import '../../../../core/error/failure.dart';
 import 'package:graphql/client.dart';
+
+import '../../../../core/error/failure.dart';
+import '../../../../core/usecases/usecases.dart';
+import '../../domain/entity/rick_and_morty.dart';
+import '../model/rick_and_morty_model.dart';
 
 abstract class RemoteDatasource {
   Future<List<RickAndMorty>> getRickAndMortyList(Params params);

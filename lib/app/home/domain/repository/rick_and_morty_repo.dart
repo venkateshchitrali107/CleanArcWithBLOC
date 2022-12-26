@@ -1,4 +1,4 @@
-import 'package:clean_arc_bloc/core/usecases/usecases.dart';
+import '../../../../core/usecases/usecases.dart';
 
 import '../../../../core/error/failure.dart';
 import 'package:dartz/dartz.dart';

@@ -1,8 +1,10 @@
 import 'package:equatable/equatable.dart';
 
-abstract class RickAndMoryBlocEvent extends Equatable {
+abstract class RickAndMortyBlocEvent extends Equatable {
   @override
   List<Object?> get props => [];
 }
 
-class GetInitialData extends RickAndMoryBlocEvent {}
+class RickAndMortyBlocEventInitialDataEvent extends RickAndMortyBlocEvent {}
+
+class RickAndMortyBlocEventNextDataEvent extends RickAndMortyBlocEvent {}
