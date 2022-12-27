@@ -1,3 +1,6 @@
+import 'package:clean_arc_bloc/app/home/domain/entity/rick_and_morty.dart';
+import 'package:flutter/foundation.dart';
+
 import '../../domain/usecases/get_rick_and_morty_list.dart';
 import 'rick_and_morty_bloc_event.dart';
 import 'rick_and_morty_bloc_state.dart';
@@ -18,6 +21,7 @@ class RickAndMortyBLOC
       event,
       emit,
     ) async {
+      if (kDebugMode) print(state.status.toString());
       if (isLoading) return;
       isLoading = true;
       if (event is RickAndMortyBlocEventNextDataEvent) {
@@ -30,6 +34,7 @@ class RickAndMortyBLOC
           ),
         );
         currentPage = 1;
+
         await getData(emit);
       }
     });
@@ -49,12 +54,11 @@ class RickAndMortyBLOC
         ),
       );
     }, (r) {
-      final dataList = state.data + r;
       emit(
         state.copyWith(
           status: RickAndMortyBlocStatus.success,
-          data: dataList,
-          hasReachedMax: false,
+          data: state.data + r,
+          hasReachedMax: r.isEmpty,
         ),
       );
     });

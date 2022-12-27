@@ -11,20 +11,20 @@ final GetIt serviceLocator = GetIt.instance;
 
 void init() {
   try {
-    serviceLocator.registerFactory(
+    serviceLocator.registerLazySingleton(
       () => RemoteDatasourceImpl(),
     );
-    serviceLocator.registerFactory(
+    serviceLocator.registerLazySingleton(
       () => RickAndMortyRepositoryImpl(
         serviceLocator<RemoteDatasourceImpl>(),
       ),
     );
-    serviceLocator.registerFactory(
+    serviceLocator.registerLazySingleton(
       () => GetRickAndMortyList(
         serviceLocator<RickAndMortyRepositoryImpl>(),
       ),
     );
-    serviceLocator.registerFactory(
+    serviceLocator.registerLazySingleton(
       () => RickAndMortyBLOC(
         serviceLocator<GetRickAndMortyList>(),
       ),

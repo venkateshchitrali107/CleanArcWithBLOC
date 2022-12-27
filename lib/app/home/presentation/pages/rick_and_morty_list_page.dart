@@ -10,8 +10,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../bloc/rick_and_morty_bloc.dart';
 
 class RickAndMortyListPage extends StatefulWidget {
-  const RickAndMortyListPage({Key? key}) : super(key: key);
-
   @override
   State<RickAndMortyListPage> createState() => _RickAndMortyListPageState();
 }
@@ -26,54 +24,44 @@ class _RickAndMortyListPageState extends State<RickAndMortyListPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text("Rick And Morty"),
-        centerTitle: true,
-      ),
-      body: BlocProvider(
-        create: (context) => serviceLocator<RickAndMortyBLOC>()
-          ..add(RickAndMortyBlocEventInitialDataEvent()),
-        child: BlocBuilder<RickAndMortyBLOC, RickAndMoryBlocState>(
-          builder: ((context, state) {
-            switch (state.status) {
-              case RickAndMortyBlocStatus.initial:
-              case RickAndMortyBlocStatus.loading:
-                return const Center(
-                  child: CircularProgressIndicator(),
-                );
-              case RickAndMortyBlocStatus.success:
-                if (state.data.isEmpty) {
-                  return const Center(
-                    child: Text(
-                      'no records found',
-                    ),
-                  );
-                }
-                return ListView.builder(
-                  itemCount: state.hasReachedMax
-                      ? state.data.length
-                      : state.data.length + 1,
-                  controller: _scrollController,
-                  itemBuilder: ((context, index) {
-                    if (index >= state.data.length) return const BottomLoader();
-                    return RickAndMortyListTile(
-                      data: state.data[index],
-                    );
-                  }),
-                );
-              case RickAndMortyBlocStatus.failure:
-                return const Center(
-                  child: Text("Something went wrong"),
-                );
-              default:
-                return const Center(
-                  child: Text("Something went wrong"),
-                );
+    return BlocBuilder<RickAndMortyBLOC, RickAndMoryBlocState>(
+      builder: ((context, state) {
+        switch (state.status) {
+          case RickAndMortyBlocStatus.initial:
+          case RickAndMortyBlocStatus.loading:
+            return const Center(
+              child: CircularProgressIndicator(),
+            );
+          case RickAndMortyBlocStatus.success:
+            if (state.data.isEmpty) {
+              return const Center(
+                child: Text(
+                  'no records found',
+                ),
+              );
             }
-          }),
-        ),
-      ),
+            return ListView.builder(
+              itemCount: state.hasReachedMax
+                  ? state.data.length
+                  : state.data.length + 1,
+              controller: _scrollController,
+              itemBuilder: ((context, index) {
+                if (index >= state.data.length) return const BottomLoader();
+                return RickAndMortyListTile(
+                  data: state.data[index],
+                );
+              }),
+            );
+          case RickAndMortyBlocStatus.failure:
+            return const Center(
+              child: Text("Something went wrong"),
+            );
+          default:
+            return const Center(
+              child: Text("Something went wrong"),
+            );
+        }
+      }),
     );
   }
 
@@ -87,9 +75,9 @@ class _RickAndMortyListPageState extends State<RickAndMortyListPage> {
 
   void _onScroll() {
     if (_isBottom) {
-      context.read<RickAndMortyBLOC>().add(
-            RickAndMortyBlocEventNextDataEvent(),
-          );
+      serviceLocator<RickAndMortyBLOC>().add(
+        RickAndMortyBlocEventNextDataEvent(),
+      );
     }
   }
 
@@ -98,5 +86,22 @@ class _RickAndMortyListPageState extends State<RickAndMortyListPage> {
     final maxScroll = _scrollController.position.maxScrollExtent;
     final currentScroll = _scrollController.offset;
     return currentScroll >= (maxScroll * 0.9);
+  }
+}
+
+class MainPage extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text("Rick And Morty"),
+        centerTitle: true,
+      ),
+      body: BlocProvider(
+        create: (context) => serviceLocator<RickAndMortyBLOC>()
+          ..add(RickAndMortyBlocEventInitialDataEvent()),
+        child: RickAndMortyListPage(),
+      ),
+    );
   }
 }
