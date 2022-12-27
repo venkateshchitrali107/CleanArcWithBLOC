@@ -1,3 +1,4 @@
+import 'package:clean_arc_bloc/app/home/data/model/rick_and_morty_model.dart';
 import 'package:dartz/dartz.dart';
 import 'package:flutter/foundation.dart';
 
@@ -12,7 +13,7 @@ class RickAndMortyRepositoryImpl implements RickAndMortyRepository {
   RickAndMortyRepositoryImpl(this.dataSource);
 
   @override
-  Future<Either<Failure, List<RickAndMorty>>> getRickAndMortyList(
+  Future<Either<Failure, List<RickAndMortyModel>>> getRickAndMortyList(
       Params params) async {
     try {
       final result = await dataSource.getRickAndMortyList(params);

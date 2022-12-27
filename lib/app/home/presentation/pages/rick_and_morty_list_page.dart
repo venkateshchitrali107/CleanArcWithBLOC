@@ -1,4 +1,4 @@
-import 'package:clean_arc_bloc/app/home/presentation/widgets/rick_and_morty_list_tile.dart';
+import '../widgets/rick_and_morty_list_tile.dart';
 
 import '../bloc/rick_and_morty_bloc_event.dart';
 import '../bloc/rick_and_morty_bloc_state.dart';
@@ -86,22 +86,5 @@ class _RickAndMortyListPageState extends State<RickAndMortyListPage> {
     final maxScroll = _scrollController.position.maxScrollExtent;
     final currentScroll = _scrollController.offset;
     return currentScroll >= (maxScroll * 0.9);
-  }
-}
-
-class MainPage extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text("Rick And Morty"),
-        centerTitle: true,
-      ),
-      body: BlocProvider(
-        create: (context) => serviceLocator<RickAndMortyBLOC>()
-          ..add(RickAndMortyBlocEventInitialDataEvent()),
-        child: RickAndMortyListPage(),
-      ),
-    );
   }
 }

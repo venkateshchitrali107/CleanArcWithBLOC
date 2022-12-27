@@ -1,11 +1,10 @@
-import 'package:clean_arc_bloc/app/home/domain/entity/rick_and_morty.dart';
 import 'package:flutter/foundation.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../../../core/usecases/usecases.dart';
 import '../../domain/usecases/get_rick_and_morty_list.dart';
 import 'rick_and_morty_bloc_event.dart';
 import 'rick_and_morty_bloc_state.dart';
-import '../../../../core/usecases/usecases.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 
 class RickAndMortyBLOC
     extends Bloc<RickAndMortyBlocEvent, RickAndMoryBlocState> {

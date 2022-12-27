@@ -1,4 +1,5 @@
-import '../../domain/entity/rick_and_morty.dart';
+import 'package:clean_arc_bloc/app/home/data/model/rick_and_morty_model.dart';
+
 import 'package:equatable/equatable.dart';
 
 enum RickAndMortyBlocStatus { initial, loading, success, failure }
@@ -6,17 +7,17 @@ enum RickAndMortyBlocStatus { initial, loading, success, failure }
 class RickAndMoryBlocState extends Equatable {
   const RickAndMoryBlocState({
     this.status = RickAndMortyBlocStatus.initial,
-    this.data = const <RickAndMorty>[],
+    this.data = const <RickAndMortyModel>[],
     this.hasReachedMax = false,
   });
 
   final RickAndMortyBlocStatus status;
-  final List<RickAndMorty> data;
+  final List<RickAndMortyModel> data;
   final bool hasReachedMax;
 
   RickAndMoryBlocState copyWith({
     RickAndMortyBlocStatus? status,
-    List<RickAndMorty>? data,
+    List<RickAndMortyModel>? data,
     bool? hasReachedMax,
   }) {
     return RickAndMoryBlocState(

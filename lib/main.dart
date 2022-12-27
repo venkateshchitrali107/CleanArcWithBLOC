@@ -1,7 +1,6 @@
+import 'app/home/presentation/pages/home_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
-import 'app/home/presentation/pages/rick_and_morty_list_page.dart';
 import 'core/error/simple_bloc_observer.dart';
 import 'dependency_container.dart' as dc;
 
@@ -22,7 +21,7 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
       ),
       debugShowCheckedModeBanner: false,
-      home: MainPage(),
+      home: HomePage(),
     );
   }
 }
