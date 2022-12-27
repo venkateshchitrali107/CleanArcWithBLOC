@@ -5,7 +5,7 @@ import 'package:flutter/foundation.dart';
 import '../../../../core/error/failure.dart';
 import '../../../../core/usecases/usecases.dart';
 import '../../domain/repository/rick_and_morty_repo.dart';
-import '../datasource/remote_datasource.dart';
+import '../datasource/remote_datasource/remote_datasource.dart';
 
 class RickAndMortyRepositoryImpl implements RickAndMortyRepository {
   final RemoteDatasourceImpl dataSource;

@@ -100,22 +100,6 @@ class RickAndMortyListTile extends StatelessWidget {
                       ),
                     ],
                   ),
-                  Row(
-                    children: [
-                      if ((data.location?.type?.trim() ?? "").isNotEmpty)
-                        Text(
-                          '${data.location!.type!}, ',
-                        ),
-                      Flexible(
-                        child: SizedBox(
-                          child: Text(
-                            data.location?.name ?? "",
-                            overflow: TextOverflow.ellipsis,
-                          ),
-                        ),
-                      ),
-                    ],
-                  )
                 ],
               ),
             )
