@@ -1,6 +1,8 @@
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:clean_arc_bloc/app/home/data/model/rick_and_morty_model.dart';
+import '../../data/model/rick_and_morty_model.dart';
 import 'package:flutter/material.dart';
+
+import 'bottom_tile_loader.dart';
 
 class RickAndMortyListTile extends StatelessWidget {
   final RickAndMortyModel data;
@@ -38,7 +40,9 @@ class RickAndMortyListTile extends StatelessWidget {
                               ),
                             ),
                           ),
-                          placeholder: _loader,
+                          placeholder: (_, __) {
+                            return const BottomLoader();
+                          },
                           errorWidget: _error,
                         ),
                       ),
@@ -86,10 +90,12 @@ class RickAndMortyListTile extends StatelessWidget {
                             '${data.gender!}, ',
                           ),
                         ),
-                      FittedBox(
-                        child: Text(
-                          data.species,
-                          overflow: TextOverflow.ellipsis,
+                      Flexible(
+                        child: SizedBox(
+                          child: Text(
+                            data.species,
+                            overflow: TextOverflow.ellipsis,
+                          ),
                         ),
                       ),
                     ],
@@ -115,16 +121,6 @@ class RickAndMortyListTile extends StatelessWidget {
             )
           ],
         ),
-      ),
-    );
-  }
-
-  Widget _loader(BuildContext context, String url) {
-    return const Center(
-      child: SizedBox(
-        height: 30,
-        width: 30,
-        child: CircularProgressIndicator(),
       ),
     );
   }

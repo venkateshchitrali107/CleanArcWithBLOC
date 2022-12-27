@@ -1,4 +1,4 @@
-import 'package:clean_arc_bloc/app/home/data/model/rick_and_morty_model.dart';
+import '../../data/model/rick_and_morty_model.dart';
 
 import 'package:equatable/equatable.dart';
 
