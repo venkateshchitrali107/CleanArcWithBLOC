@@ -108,6 +108,17 @@ class RickAndMortyBLOC
               filterType: event.type,
             ),
           );
+        } else if (event is RickAndMortyBlocResetEvent) {
+          emit(
+            const RickAndMoryBlocState(),
+          );
+          currentPage = 1;
+          await getData(
+            emit,
+            Params(
+              pageNumber: currentPage,
+            ),
+          );
         }
       },
     );
