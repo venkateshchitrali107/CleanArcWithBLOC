@@ -1,6 +1,4 @@
 import 'dart:async';
-import 'package:connectivity_plus/connectivity_plus.dart';
-
 import '../../../../core/network/network_info.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -54,6 +52,17 @@ class RickAndMortyBLOC
         );
         currentPage = 1;
         await getData(emit);
+      } else if (event is RickAndMortyBlocFilterUpdateEvent) {
+        isLoading = false;
+        emit(
+          state.copyWith(
+            status: state.enableSearch
+                ? RickAndMortyBlocStatus.disableSearch
+                : RickAndMortyBlocStatus.enableSearch,
+            enableSearch: !state.enableSearch,
+            searchedKey: "",
+          ),
+        );
       }
     });
     networkSub = networkInfo.onNewDataStream.listen((updatedStatus) async {
@@ -86,9 +95,5 @@ class RickAndMortyBLOC
         ),
       );
     });
-  }
-
-  void dispose() {
-    networkSub.cancel();
   }
 }

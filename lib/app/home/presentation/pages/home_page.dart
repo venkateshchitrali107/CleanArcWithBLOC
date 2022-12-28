@@ -14,6 +14,17 @@ class HomePage extends StatelessWidget {
       appBar: AppBar(
         title: const Text("Rick And Morty"),
         centerTitle: true,
+        actions: [
+          IconButton(
+            icon: const Icon(
+              Icons.filter_alt,
+            ),
+            onPressed: () {
+              serviceLocator<RickAndMortyBLOC>()
+                  .add(RickAndMortyBlocFilterUpdateEvent());
+            },
+          )
+        ],
       ),
       body: BlocProvider(
         create: (context) => serviceLocator<RickAndMortyBLOC>()

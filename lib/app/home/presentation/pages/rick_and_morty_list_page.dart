@@ -15,6 +15,8 @@ class RickAndMortyListPage extends StatefulWidget {
 
 class _RickAndMortyListPageState extends State<RickAndMortyListPage> {
   final _scrollController = ScrollController();
+  String selectedValue = "Name";
+
   @override
   void initState() {
     super.initState();
@@ -32,24 +34,39 @@ class _RickAndMortyListPageState extends State<RickAndMortyListPage> {
               child: CircularProgressIndicator(),
             );
           case RickAndMortyBlocStatus.success:
+          case RickAndMortyBlocStatus.enableSearch:
+          case RickAndMortyBlocStatus.disableSearch:
             if (state.data.isEmpty) {
               return const Center(
                 child: Text(
-                  'no records found',
+                  'No records found',
                 ),
               );
             }
-            return ListView.builder(
-              itemCount: state.hasReachedMax
-                  ? state.data.length
-                  : state.data.length + 1,
-              controller: _scrollController,
-              itemBuilder: ((context, index) {
-                if (index >= state.data.length) return const BottomLoader();
-                return RickAndMortyListTile(
-                  data: state.data[index],
-                );
-              }),
+            if (state.status == RickAndMortyBlocStatus.disableSearch)
+              selectedValue = "Name";
+
+            return Column(
+              children: [
+                if (state.enableSearch) SearchBar(state),
+                Expanded(
+                  child: ListView.builder(
+                    shrinkWrap: true,
+                    itemCount: state.hasReachedMax
+                        ? state.data.length
+                        : state.data.length + 1,
+                    controller: _scrollController,
+                    itemBuilder: ((context, index) {
+                      if (index >= state.data.length) {
+                        return const BottomLoader();
+                      }
+                      return RickAndMortyListTile(
+                        data: state.data[index],
+                      );
+                    }),
+                  ),
+                ),
+              ],
             );
           case RickAndMortyBlocStatus.failure:
             return const Center(
@@ -64,11 +81,77 @@ class _RickAndMortyListPageState extends State<RickAndMortyListPage> {
     );
   }
 
+  SizedBox SearchBar(RickAndMoryBlocState state) {
+    return SizedBox(
+      height: 60,
+      child: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: TextField(
+          cursorColor: Colors.grey,
+          decoration: InputDecoration(
+            fillColor: Colors.white,
+            filled: true,
+            border: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(10),
+                borderSide: BorderSide.none),
+            hintText: 'Search',
+            hintStyle: const TextStyle(
+              color: Colors.grey,
+              fontSize: 13,
+            ),
+            prefixIcon: Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: SizedBox(
+                width: 80,
+                child: DropdownButton<String>(
+                  underline: Container(),
+                  value: selectedValue,
+                  items: <String>[
+                    'Name',
+                    'Status',
+                    'Speices',
+                  ].map<DropdownMenuItem<String>>((String value) {
+                    return DropdownMenuItem<String>(
+                      value: value,
+                      child: Text(
+                        value,
+                        style: const TextStyle(
+                          fontSize: 14,
+                        ),
+                      ),
+                    );
+                  }).toList(),
+                  onChanged: (String? newValue) {
+                    setState(
+                      () {
+                        selectedValue = newValue ?? "Name";
+                      },
+                    );
+                  },
+                ),
+              ),
+            ),
+            suffixIcon: TextButton(
+              style: ButtonStyle(
+                foregroundColor: MaterialStateProperty.all<Color>(Colors.blue),
+              ),
+              onPressed: () {},
+              child: const Text(
+                'Apply',
+              ),
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+
   @override
   void dispose() {
     _scrollController
       ..removeListener(_onScroll)
       ..dispose();
+    serviceLocator<RickAndMortyBLOC>().networkSub.cancel();
     super.dispose();
   }
 

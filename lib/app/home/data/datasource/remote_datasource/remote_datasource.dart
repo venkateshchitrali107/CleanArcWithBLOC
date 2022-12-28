@@ -13,6 +13,7 @@ abstract class RemoteDatasource {
 class RemoteDatasourceImpl implements RemoteDatasource {
   final MyDatabase db;
   RemoteDatasourceImpl(this.db);
+
   @override
   Future<List<RickAndMortyModel>> getRickAndMortyList(Params params) async {
     try {

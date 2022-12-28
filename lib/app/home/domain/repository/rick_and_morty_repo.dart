@@ -8,4 +8,7 @@ abstract class RickAndMortyRepository {
   Future<Either<Failure, List<RickAndMortyModel>>> getRickAndMortyList(
     Params params,
   );
+  Future<Either<Failure, List<RickAndMortyModel>>> getFilteredRickAndMortyList(
+    Params params,
+  );
 }
