@@ -41,6 +41,41 @@ class MyDatabase extends _$MyDatabase {
               offset: offset,
             ))
           .get();
+  Future<List<RickAndMortyModelLocalData>> getFilteredName(
+    String searchKey,
+  ) =>
+      (select(
+        rickAndMortyModelLocal,
+      )..where(
+              (tbl) => tbl.name.like(
+                searchKey,
+              ),
+            ))
+          .get();
+
+  Future<List<RickAndMortyModelLocalData>> getFilteredStatus(
+    String searchKey,
+  ) =>
+      (select(
+        rickAndMortyModelLocal,
+      )..where(
+              (tbl) => tbl.status.like(
+                searchKey,
+              ),
+            ))
+          .get();
+
+  Future<List<RickAndMortyModelLocalData>> getFilteredSpecies(
+    String searchKey,
+  ) =>
+      (select(
+        rickAndMortyModelLocal,
+      )..where(
+              (tbl) => tbl.species.like(
+                searchKey,
+              ),
+            ))
+          .get();
 
   void deleteAll() => delete(
         rickAndMortyModelLocal,

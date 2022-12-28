@@ -16,8 +16,19 @@ class LocalDatasourceImpl implements LocalDatasource {
   @override
   Future<List<RickAndMortyModel>> getRickAndMortyList(Params params) async {
     try {
-      final offset = ((params.pageNumber - 1) * pageSize);
-      List<RickAndMortyModelLocalData> res = await db.getAll(pageSize, offset);
+      List<RickAndMortyModelLocalData> res = [];
+      if (params.pageNumber == 0) {
+        if (params.filterType.toLowerCase() == "name") {
+          res = await db.getFilteredName(params.searchKey.trim());
+        } else if (params.filterType.toLowerCase() == "status") {
+          res = await db.getFilteredStatus(params.searchKey.trim());
+        } else if (params.filterType.toLowerCase() == "species") {
+          res = await db.getFilteredStatus(params.searchKey.trim());
+        }
+      } else {
+        final offset = ((params.pageNumber - 1) * pageSize);
+        res = await db.getAll(pageSize, offset);
+      }
       if (res.isNotEmpty) {
         List<RickAndMortyModel> currentRes = [];
         for (var rep in res) {

@@ -21,3 +21,5 @@ class RickAndMortyBlocGetFilterDataEvent extends RickAndMortyBlocEvent {
     required this.type,
   });
 }
+
+class RickAndMortyBlocResetEvent extends RickAndMortyBlocEvent {}

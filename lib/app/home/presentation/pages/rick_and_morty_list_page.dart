@@ -30,30 +30,39 @@ class _RickAndMortyListPageState extends State<RickAndMortyListPage> {
         switch (state.status) {
           case RickAndMortyBlocStatus.initial:
           case RickAndMortyBlocStatus.loading:
-            return const Center(
-              child: CircularProgressIndicator(),
+            return Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                if (state.enableSearch) SearchBar(state),
+                const Spacer(),
+                const Center(child: CircularProgressIndicator()),
+                const Spacer(),
+              ],
             );
           case RickAndMortyBlocStatus.success:
           case RickAndMortyBlocStatus.enableSearch:
           case RickAndMortyBlocStatus.disableSearch:
             if (state.data.isEmpty) {
               return Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   if (state.enableSearch) SearchBar(state),
                   const Spacer(),
-                  const Text(
-                    'No records found',
+                  const Center(
+                    child: Text(
+                      'No records found',
+                    ),
                   ),
                   const Spacer(),
                 ],
               );
             }
-            if (state.status == RickAndMortyBlocStatus.disableSearch) {
+            if (!state.enableSearch) {
               selectedValue = "Name";
               filterController.clear();
             }
-
             return Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 if (state.enableSearch) SearchBar(state),
                 Expanded(
@@ -77,22 +86,66 @@ class _RickAndMortyListPageState extends State<RickAndMortyListPage> {
             );
           case RickAndMortyBlocStatus.failure:
             return Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 if (state.enableSearch) SearchBar(state),
                 const Spacer(),
-                const Text(
-                  'Something went wrong',
+                Center(
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      const Text(
+                        'Something went wrong',
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: SizedBox(
+                          child: OutlinedButton(
+                            onPressed: (() {
+                              serviceLocator<RickAndMortyBLOC>()
+                                  .add(RickAndMortyBlocResetEvent());
+                            }),
+                            child: const Text(
+                              'Re-Try',
+                            ),
+                          ),
+                        ),
+                      )
+                    ],
+                  ),
                 ),
                 const Spacer(),
               ],
             );
           default:
             return Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 if (state.enableSearch) SearchBar(state),
                 const Spacer(),
-                const Text(
-                  'Something went wrong',
+                Center(
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      const Text(
+                        'Something went wrong',
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: SizedBox(
+                          child: OutlinedButton(
+                            onPressed: (() {
+                              serviceLocator<RickAndMortyBLOC>()
+                                  .add(RickAndMortyBlocResetEvent());
+                            }),
+                            child: const Text(
+                              'Re-Try',
+                            ),
+                          ),
+                        ),
+                      )
+                    ],
+                  ),
                 ),
                 const Spacer(),
               ],
@@ -159,6 +212,7 @@ class _RickAndMortyListPageState extends State<RickAndMortyListPage> {
               ),
               onPressed: () {
                 if (filterController.text.isNotEmpty) {
+                  FocusManager.instance.primaryFocus?.unfocus();
                   serviceLocator<RickAndMortyBLOC>().isLoading = false;
                   serviceLocator<RickAndMortyBLOC>().add(
                     RickAndMortyBlocGetFilterDataEvent(
