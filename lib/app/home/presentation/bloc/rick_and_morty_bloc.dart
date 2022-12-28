@@ -33,7 +33,12 @@ class RickAndMortyBLOC
       if (event is RickAndMortyBlocEventNextDataEvent) {
         if (state.hasReachedMax) return;
         currentPage++;
-        await getData(emit);
+        await getData(
+          emit,
+          Params(
+            pageNumber: currentPage,
+          ),
+        );
       } else if (event is RickAndMortyBlocEventInitialDataEvent) {
         emit(
           state.copyWith(
@@ -41,7 +46,12 @@ class RickAndMortyBLOC
           ),
         );
         currentPage = 1;
-        await getData(emit);
+        await getData(
+          emit,
+          Params(
+            pageNumber: currentPage,
+          ),
+        );
       } else if (event is RickAndMortyBlocNetworkStatusUpdateEvent) {
         emit(
           state.copyWith(
@@ -51,7 +61,12 @@ class RickAndMortyBLOC
           ),
         );
         currentPage = 1;
-        await getData(emit);
+        await getData(
+          emit,
+          Params(
+            pageNumber: currentPage,
+          ),
+        );
       } else if (event is RickAndMortyBlocFilterUpdateEvent) {
         isLoading = false;
         emit(
@@ -63,6 +78,22 @@ class RickAndMortyBLOC
             searchedKey: "",
           ),
         );
+      } else if (event is RickAndMortyBlocGetFilterDataEvent) {
+        emit(
+          state.copyWith(
+            status: RickAndMortyBlocStatus.loading,
+            data: [],
+            hasReachedMax: true,
+          ),
+        );
+        currentPage = 1;
+        await getData(
+            emit,
+            Params(
+              pageNumber: 0,
+              searchKey: event.searchKey,
+              filterType: event.type,
+            ));
       }
     });
     networkSub = networkInfo.onNewDataStream.listen((updatedStatus) async {
@@ -73,12 +104,11 @@ class RickAndMortyBLOC
     });
   }
 
-  Future<void> getData(Emitter<RickAndMoryBlocState> emit) async {
-    var receivedData = await listUseCase.call(
-      Params(
-        pageNumber: currentPage,
-      ),
-    );
+  Future<void> getData(
+    Emitter<RickAndMoryBlocState> emit,
+    Params params,
+  ) async {
+    var receivedData = await listUseCase.call(params);
     isLoading = false;
     receivedData.fold((l) {
       emit(
@@ -91,7 +121,7 @@ class RickAndMortyBLOC
         state.copyWith(
           status: RickAndMortyBlocStatus.success,
           data: state.data + r,
-          hasReachedMax: r.isEmpty,
+          hasReachedMax: params.pageNumber == 0 ? true : r.isEmpty,
         ),
       );
     });

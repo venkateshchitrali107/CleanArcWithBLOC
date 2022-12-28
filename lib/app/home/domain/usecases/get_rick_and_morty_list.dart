@@ -15,13 +15,3 @@ class GetRickAndMortyList implements Usecases<List<RickAndMortyModel>, Params> {
     return await repo.getRickAndMortyList(params);
   }
 }
-
-class GetFilteredRickAndMortyList
-    implements Usecases<List<RickAndMortyModel>, Params> {
-  final RickAndMortyRepositoryImpl repo;
-  GetFilteredRickAndMortyList(this.repo);
-  @override
-  Future<Either<Failure, List<RickAndMortyModel>>> call(Params params) async {
-    return await repo.getRickAndMortyList(params);
-  }
-}

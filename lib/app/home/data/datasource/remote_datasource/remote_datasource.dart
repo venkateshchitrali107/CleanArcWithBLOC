@@ -21,7 +21,25 @@ class RemoteDatasourceImpl implements RemoteDatasource {
       final httpLink = HttpLink('https://rickandmortyapi.com/graphql');
       final link = Link.from([httpLink]);
       final client = GraphQLClient(cache: GraphQLCache(), link: link);
-      final getList = '''
+      String getListQuery;
+      if (params.pageNumber == 0) {
+        getListQuery = '''query {
+  characters(filter: { ${params.filterType.toLowerCase()}:" ${params.searchKey}"}){
+    results{
+      id
+      name
+      type
+      status
+      species
+      gender
+      
+      image
+      created
+    }
+  }
+}''';
+      } else {
+        getListQuery = '''
   query {
   characters(page:${params.pageNumber}){
    results{
@@ -37,10 +55,11 @@ class RemoteDatasourceImpl implements RemoteDatasource {
   }
 }
 ''';
+      }
       final result = await client.query(
         QueryOptions(
           document: gql(
-            getList,
+            getListQuery,
           ),
         ),
       );

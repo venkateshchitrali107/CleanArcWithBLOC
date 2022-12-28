@@ -9,12 +9,20 @@ abstract class Usecases<Type, Param> {
 
 class Params extends Equatable {
   final int pageNumber;
+  final String filterType;
+  final String searchKey;
   const Params({
     required this.pageNumber,
+    this.filterType = "",
+    this.searchKey = "",
   });
 
   @override
-  List<Object> get props => [pageNumber];
+  List<Object> get props => [
+        pageNumber,
+        filterType,
+        searchKey,
+      ];
 }
 
 class NoParams extends Equatable {

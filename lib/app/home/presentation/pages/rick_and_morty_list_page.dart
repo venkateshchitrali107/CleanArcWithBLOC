@@ -16,7 +16,7 @@ class RickAndMortyListPage extends StatefulWidget {
 class _RickAndMortyListPageState extends State<RickAndMortyListPage> {
   final _scrollController = ScrollController();
   String selectedValue = "Name";
-
+  TextEditingController filterController = TextEditingController();
   @override
   void initState() {
     super.initState();
@@ -37,14 +37,21 @@ class _RickAndMortyListPageState extends State<RickAndMortyListPage> {
           case RickAndMortyBlocStatus.enableSearch:
           case RickAndMortyBlocStatus.disableSearch:
             if (state.data.isEmpty) {
-              return const Center(
-                child: Text(
-                  'No records found',
-                ),
+              return Column(
+                children: [
+                  if (state.enableSearch) SearchBar(state),
+                  const Spacer(),
+                  const Text(
+                    'No records found',
+                  ),
+                  const Spacer(),
+                ],
               );
             }
-            if (state.status == RickAndMortyBlocStatus.disableSearch)
+            if (state.status == RickAndMortyBlocStatus.disableSearch) {
               selectedValue = "Name";
+              filterController.clear();
+            }
 
             return Column(
               children: [
@@ -69,12 +76,26 @@ class _RickAndMortyListPageState extends State<RickAndMortyListPage> {
               ],
             );
           case RickAndMortyBlocStatus.failure:
-            return const Center(
-              child: Text("Something went wrong"),
+            return Column(
+              children: [
+                if (state.enableSearch) SearchBar(state),
+                const Spacer(),
+                const Text(
+                  'Something went wrong',
+                ),
+                const Spacer(),
+              ],
             );
           default:
-            return const Center(
-              child: Text("Something went wrong"),
+            return Column(
+              children: [
+                if (state.enableSearch) SearchBar(state),
+                const Spacer(),
+                const Text(
+                  'Something went wrong',
+                ),
+                const Spacer(),
+              ],
             );
         }
       }),
@@ -87,6 +108,7 @@ class _RickAndMortyListPageState extends State<RickAndMortyListPage> {
       child: Padding(
         padding: const EdgeInsets.all(8.0),
         child: TextField(
+          controller: filterController,
           cursorColor: Colors.grey,
           decoration: InputDecoration(
             fillColor: Colors.white,
@@ -109,7 +131,7 @@ class _RickAndMortyListPageState extends State<RickAndMortyListPage> {
                   items: <String>[
                     'Name',
                     'Status',
-                    'Speices',
+                    'Species',
                   ].map<DropdownMenuItem<String>>((String value) {
                     return DropdownMenuItem<String>(
                       value: value,
@@ -135,7 +157,17 @@ class _RickAndMortyListPageState extends State<RickAndMortyListPage> {
               style: ButtonStyle(
                 foregroundColor: MaterialStateProperty.all<Color>(Colors.blue),
               ),
-              onPressed: () {},
+              onPressed: () {
+                if (filterController.text.isNotEmpty) {
+                  serviceLocator<RickAndMortyBLOC>().isLoading = false;
+                  serviceLocator<RickAndMortyBLOC>().add(
+                    RickAndMortyBlocGetFilterDataEvent(
+                      searchKey: filterController.text,
+                      type: selectedValue,
+                    ),
+                  );
+                }
+              },
               child: const Text(
                 'Apply',
               ),

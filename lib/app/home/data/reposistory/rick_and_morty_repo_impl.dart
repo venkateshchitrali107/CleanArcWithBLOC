@@ -49,11 +49,4 @@ class RickAndMortyRepositoryImpl implements RickAndMortyRepository {
       );
     }
   }
-
-  @override
-  Future<Either<Failure, List<RickAndMortyModel>>> getFilteredRickAndMortyList(
-      Params params) {
-    // TODO: implement getFilteredRickAndMortyList
-    throw UnimplementedError();
-  }
 }

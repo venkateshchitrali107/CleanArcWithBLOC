@@ -12,3 +12,12 @@ class RickAndMortyBlocEventNextDataEvent extends RickAndMortyBlocEvent {}
 class RickAndMortyBlocNetworkStatusUpdateEvent extends RickAndMortyBlocEvent {}
 
 class RickAndMortyBlocFilterUpdateEvent extends RickAndMortyBlocEvent {}
+
+class RickAndMortyBlocGetFilterDataEvent extends RickAndMortyBlocEvent {
+  final String type;
+  final String searchKey;
+  RickAndMortyBlocGetFilterDataEvent({
+    required this.searchKey,
+    required this.type,
+  });
+}
