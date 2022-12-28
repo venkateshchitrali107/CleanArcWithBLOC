@@ -9,7 +9,7 @@ abstract class Usecases<Type, Param> {
 
 class Params extends Equatable {
   final int pageNumber;
-  Params({
+  const Params({
     required this.pageNumber,
   });
 

@@ -1,13 +1,12 @@
-import '../widgets/rick_and_morty_list_tile.dart';
-
-import '../bloc/rick_and_morty_bloc_event.dart';
-import '../bloc/rick_and_morty_bloc_state.dart';
-import '../widgets/bottom_tile_loader.dart';
-import '../../../../dependency_container.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../../../dependency_container.dart';
 import '../bloc/rick_and_morty_bloc.dart';
+import '../bloc/rick_and_morty_bloc_event.dart';
+import '../bloc/rick_and_morty_bloc_state.dart';
+import '../widgets/bottom_tile_loader.dart';
+import '../widgets/rick_and_morty_list_tile.dart';
 
 class RickAndMortyListPage extends StatefulWidget {
   @override

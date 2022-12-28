@@ -1,3 +1,5 @@
+import '../../../../core/network/network_info.dart';
+
 import '../../data/model/rick_and_morty_model.dart';
 import 'package:dartz/dartz.dart';
 

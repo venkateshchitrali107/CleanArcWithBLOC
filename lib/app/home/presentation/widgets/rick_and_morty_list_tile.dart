@@ -1,7 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
-import '../../data/model/rick_and_morty_model.dart';
 import 'package:flutter/material.dart';
 
+import '../../data/model/rick_and_morty_model.dart';
 import 'bottom_tile_loader.dart';
 
 class RickAndMortyListTile extends StatelessWidget {

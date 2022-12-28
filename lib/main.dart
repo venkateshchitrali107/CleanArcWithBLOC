@@ -1,3 +1,4 @@
+import 'package:clean_arc_bloc/core/network/network_info.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 

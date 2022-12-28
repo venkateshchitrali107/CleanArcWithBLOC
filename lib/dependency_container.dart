@@ -1,3 +1,6 @@
+import 'app/home/data/datasource/local_datasource/db.dart';
+import 'app/home/data/datasource/local_datasource/local_datasource.dart';
+import 'core/network/network_info.dart';
 import 'package:flutter/foundation.dart';
 import 'package:get_it/get_it.dart';
 
@@ -11,11 +14,26 @@ final GetIt serviceLocator = GetIt.instance;
 void init() {
   try {
     serviceLocator.registerLazySingleton(
-      () => RemoteDatasourceImpl(),
+      () => NetworkInfoImpl()..checkForNetworkConnection(),
+    );
+    serviceLocator.registerLazySingleton(
+      () => MyDatabase(),
+    );
+    serviceLocator.registerLazySingleton(
+      () => RemoteDatasourceImpl(
+        serviceLocator<MyDatabase>(),
+      ),
+    );
+    serviceLocator.registerLazySingleton(
+      () => LocalDatasourceImpl(
+        serviceLocator<MyDatabase>(),
+      ),
     );
     serviceLocator.registerLazySingleton(
       () => RickAndMortyRepositoryImpl(
-        serviceLocator<RemoteDatasourceImpl>(),
+        remoteDataSource: serviceLocator<RemoteDatasourceImpl>(),
+        localDataSource: serviceLocator<LocalDatasourceImpl>(),
+        networkInfo: serviceLocator<NetworkInfoImpl>(),
       ),
     );
     serviceLocator.registerLazySingleton(
@@ -25,7 +43,8 @@ void init() {
     );
     serviceLocator.registerLazySingleton(
       () => RickAndMortyBLOC(
-        serviceLocator<GetRickAndMortyList>(),
+        listUseCase: serviceLocator<GetRickAndMortyList>(),
+        networkInfo: serviceLocator<NetworkInfoImpl>(),
       ),
     );
   } catch (e) {

@@ -1,3 +1,4 @@
+import '../local_datasource/db.dart';
 import 'package:flutter/foundation.dart';
 import 'package:graphql/client.dart';
 
@@ -10,9 +11,12 @@ abstract class RemoteDatasource {
 }
 
 class RemoteDatasourceImpl implements RemoteDatasource {
+  final MyDatabase db;
+  RemoteDatasourceImpl(this.db);
   @override
   Future<List<RickAndMortyModel>> getRickAndMortyList(Params params) async {
     try {
+      if (params.pageNumber == 1) db.deleteAll();
       final httpLink = HttpLink('https://rickandmortyapi.com/graphql');
       final link = Link.from([httpLink]);
       final client = GraphQLClient(cache: GraphQLCache(), link: link);
@@ -26,20 +30,6 @@ class RemoteDatasourceImpl implements RemoteDatasource {
       status
       species
       gender
-      origin{
-        id
-        name
-        type
-        dimension
-        created
-      }
-      location{
-        id
-        name
-        type
-        dimension
-        created
-      }
       image
       created
     }
@@ -58,7 +48,16 @@ class RemoteDatasourceImpl implements RemoteDatasource {
       final data = char?['results'] as List;
       List<RickAndMortyModel> decodedList = [];
       for (var currentElement in data) {
-        decodedList.add(RickAndMortyModel.fromJson(currentElement));
+        decodedList.add(
+          RickAndMortyModel.fromJson(
+            currentElement,
+          ),
+        );
+        await db.insert(
+          RickAndMortyModelLocalData.fromJson(
+            currentElement,
+          ),
+        );
       }
       return decodedList;
     } catch (e) {
