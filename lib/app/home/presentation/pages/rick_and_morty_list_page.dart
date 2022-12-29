@@ -21,6 +21,13 @@ class _RickAndMortyListPageState extends State<RickAndMortyListPage> {
   void initState() {
     super.initState();
     _scrollController.addListener(_onScroll);
+    Future.delayed(
+      const Duration(seconds: 2),
+    ).then(
+      (_) => serviceLocator<RickAndMortyBLOC>().add(
+        RickAndMortyBlocEventInitialDataEvent(),
+      ),
+    );
   }
 
   @override
@@ -48,9 +55,10 @@ class _RickAndMortyListPageState extends State<RickAndMortyListPage> {
                 children: [
                   if (state.enableSearch) SearchBar(state),
                   const Spacer(),
-                  const Center(
+                  Center(
                     child: Text(
                       'No records found',
+                      style: Theme.of(context).textTheme.bodyText1,
                     ),
                   ),
                   const Spacer(),
@@ -94,8 +102,9 @@ class _RickAndMortyListPageState extends State<RickAndMortyListPage> {
                   child: Column(
                     mainAxisSize: MainAxisSize.min,
                     children: [
-                      const Text(
+                      Text(
                         'Something went wrong',
+                        style: Theme.of(context).textTheme.bodyText1,
                       ),
                       Padding(
                         padding: const EdgeInsets.all(8.0),
@@ -105,8 +114,9 @@ class _RickAndMortyListPageState extends State<RickAndMortyListPage> {
                               serviceLocator<RickAndMortyBLOC>()
                                   .add(RickAndMortyBlocResetEvent());
                             }),
-                            child: const Text(
+                            child: Text(
                               'Re-Try',
+                              style: Theme.of(context).textTheme.bodyText1,
                             ),
                           ),
                         ),
@@ -127,8 +137,9 @@ class _RickAndMortyListPageState extends State<RickAndMortyListPage> {
                   child: Column(
                     mainAxisSize: MainAxisSize.min,
                     children: [
-                      const Text(
+                      Text(
                         'Something went wrong',
+                        style: Theme.of(context).textTheme.bodyText1,
                       ),
                       Padding(
                         padding: const EdgeInsets.all(8.0),
@@ -138,8 +149,9 @@ class _RickAndMortyListPageState extends State<RickAndMortyListPage> {
                               serviceLocator<RickAndMortyBLOC>()
                                   .add(RickAndMortyBlocResetEvent());
                             }),
-                            child: const Text(
+                            child: Text(
                               'Re-Try',
+                              style: Theme.of(context).textTheme.bodyText1,
                             ),
                           ),
                         ),
@@ -157,23 +169,31 @@ class _RickAndMortyListPageState extends State<RickAndMortyListPage> {
 
   SizedBox SearchBar(RickAndMoryBlocState state) {
     return SizedBox(
-      height: 60,
-      child: Padding(
+      height: 70,
+      child: Container(
         padding: const EdgeInsets.all(8.0),
+        margin: const EdgeInsets.all(8.0),
+        decoration: const BoxDecoration(
+          borderRadius: BorderRadius.all(
+            Radius.circular(
+              20,
+            ),
+          ),
+          color: Colors.white,
+        ),
         child: TextField(
           controller: filterController,
           cursorColor: Colors.grey,
+          textAlign: TextAlign.justify,
+          textAlignVertical: TextAlignVertical.bottom,
           decoration: InputDecoration(
-            fillColor: Colors.white,
-            filled: true,
             border: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(10),
                 borderSide: BorderSide.none),
             hintText: 'Search',
-            hintStyle: const TextStyle(
-              color: Colors.grey,
-              fontSize: 13,
-            ),
+            hintStyle: Theme.of(context).textTheme.bodyText1?.copyWith(
+                  color: Colors.grey,
+                ),
             prefixIcon: Padding(
               padding: const EdgeInsets.all(8.0),
               child: SizedBox(
@@ -190,9 +210,7 @@ class _RickAndMortyListPageState extends State<RickAndMortyListPage> {
                       value: value,
                       child: Text(
                         value,
-                        style: const TextStyle(
-                          fontSize: 14,
-                        ),
+                        style: Theme.of(context).textTheme.bodyText1,
                       ),
                     );
                   }).toList(),
@@ -222,8 +240,12 @@ class _RickAndMortyListPageState extends State<RickAndMortyListPage> {
                   );
                 }
               },
-              child: const Text(
+              child: Text(
                 'Apply',
+                style: Theme.of(context).textTheme.bodyText1?.copyWith(
+                      color: Theme.of(context).primaryColor,
+                      fontWeight: FontWeight.bold,
+                    ),
               ),
             ),
           ),

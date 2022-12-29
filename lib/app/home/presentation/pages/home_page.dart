@@ -27,8 +27,7 @@ class HomePage extends StatelessWidget {
         ],
       ),
       body: BlocProvider(
-        create: (context) => serviceLocator<RickAndMortyBLOC>()
-          ..add(RickAndMortyBlocEventInitialDataEvent()),
+        create: (context) => serviceLocator<RickAndMortyBLOC>(),
         child: RickAndMortyListPage(),
       ),
     );

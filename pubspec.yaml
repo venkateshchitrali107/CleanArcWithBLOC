@@ -29,5 +29,31 @@ dev_dependencies:
   flutter_lints: ^2.0.0
   drift_dev: ^2.2.0+1
   build_runner: ^2.2.1
+  flutter_launcher_icons: "^0.10.0"
+
+flutter_icons:
+  android: "launcher_icon"
+  ios: true
+  image_path: "asset/github.png"
+  min_sdk_android: 21 # android min sdk min:16, default 21
+  web:
+    generate: true
+    image_path: "path/to/image.png"
+    background_color: "#hexcode"
+    theme_color: "#hexcode"
+  windows:
+    generate: true
+    image_path: "path/to/image.png"
+    icon_size: 48
 flutter:
   uses-material-design: true
+  fonts:
+    - family: Merriweather
+      fonts:
+        - asset: asset/Merriweather/Merriweather-Regular.ttf
+        - asset: asset/Merriweather/Merriweather-Italic.ttf
+        - asset: asset/Merriweather/Merriweather-Black.ttf
+        - asset: asset/Merriweather/Merriweather-Bold.ttf
+        - asset: asset/Merriweather/Merriweather-Light.ttf
+  assets:
+    - asset/github.png

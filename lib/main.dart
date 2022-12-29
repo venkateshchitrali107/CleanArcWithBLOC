@@ -1,8 +1,7 @@
-import 'package:clean_arc_bloc/core/network/network_info.dart';
+import 'package:clean_arc_bloc/splash_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
-import 'app/home/presentation/pages/home_page.dart';
+import 'core/theme/app_theme.dart';
 import 'core/error/simple_bloc_observer.dart';
 import 'dependency_container.dart' as dc;
 
@@ -18,12 +17,9 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
+      theme: AppTheme.lightTheme,
       debugShowCheckedModeBanner: false,
-      home: HomePage(),
+      home: SplashScreen(),
     );
   }
 }
