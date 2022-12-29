@@ -19,6 +19,7 @@ class HomePage extends StatelessWidget {
               Icons.filter_alt,
             ),
             onPressed: () {
+              serviceLocator<RickAndMortyBLOC>().isLoading = false;
               serviceLocator<RickAndMortyBLOC>()
                   .add(RickAndMortyBlocFilterUpdateEvent());
             },
