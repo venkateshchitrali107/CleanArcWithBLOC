@@ -1,5 +1,6 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.clean_arc_bloc">
+    <uses-permission android:name="android.permission.INTERNET" />
    <application
         android:label="RickAndMorty"
         android:name="${applicationName}"

@@ -48,7 +48,7 @@ class MyDatabase extends _$MyDatabase {
         rickAndMortyModelLocal,
       )..where(
               (tbl) => tbl.name.like(
-                searchKey,
+                "%$searchKey%",
               ),
             ))
           .get();
@@ -60,7 +60,7 @@ class MyDatabase extends _$MyDatabase {
         rickAndMortyModelLocal,
       )..where(
               (tbl) => tbl.status.like(
-                searchKey,
+                "%$searchKey%",
               ),
             ))
           .get();
@@ -72,7 +72,7 @@ class MyDatabase extends _$MyDatabase {
         rickAndMortyModelLocal,
       )..where(
               (tbl) => tbl.species.like(
-                searchKey,
+                "%$searchKey%",
               ),
             ))
           .get();

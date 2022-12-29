@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../dependency_container.dart';
@@ -186,6 +187,7 @@ class _RickAndMortyListPageState extends State<RickAndMortyListPage> {
           cursorColor: Colors.grey,
           textAlign: TextAlign.justify,
           textAlignVertical: TextAlignVertical.bottom,
+          textCapitalization: TextCapitalization.sentences,
           decoration: InputDecoration(
             border: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(10),
