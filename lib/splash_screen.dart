@@ -1,6 +1,8 @@
-import 'package:clean_arc_bloc/app/home/presentation/pages/home_page.dart';
 import 'package:flutter/material.dart';
 
+import 'app/home/presentation/pages/home/home_page.dart';
+
+// ignore: use_key_in_widget_constructors
 class SplashScreen extends StatefulWidget {
   @override
   State<SplashScreen> createState() => _SplashScreenState();

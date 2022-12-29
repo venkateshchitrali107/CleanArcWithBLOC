@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 class AppTheme {
   AppTheme._();
-  static Color _iconColor = Colors.white24;
+  static const Color _iconColor = Colors.white24;
   static const Color _lightPrimaryColor = Color.fromARGB(255, 5, 105, 151);
   static const Color _lightPrimaryVariantColor = Color(0xFF33678A);
   static const Color _lightSecondaryColor = Colors.white24;
@@ -30,7 +30,7 @@ class AppTheme {
       onPrimary: _lightOnPrimaryColor,
       onSecondary: _lightPrimaryVariantColor,
     ),
-    iconTheme: IconThemeData(
+    iconTheme: const IconThemeData(
       color: _iconColor,
     ),
     textTheme: _lightTextTheme,
@@ -52,7 +52,7 @@ class AppTheme {
         onPrimary: _darkOnPrimaryColor,
         background: Colors.white12,
       ),
-      iconTheme: IconThemeData(
+      iconTheme: const IconThemeData(
         color: _iconColor,
       ),
       textTheme: _darkTextTheme,
@@ -60,6 +60,7 @@ class AppTheme {
 
   static const TextTheme _lightTextTheme = TextTheme(
     headline1: _lightScreenHeading1TextStyle,
+    headline2: _lightScreenHeading2TextStyle,
     bodyText1: _lightScreenBody1TextStyle,
   );
 
@@ -70,6 +71,12 @@ class AppTheme {
   static const TextStyle _lightScreenHeading1TextStyle = TextStyle(
     fontSize: 18.0,
     fontWeight: FontWeight.bold,
+    color: _lightPrimaryColor,
+    fontFamily: "Merriweather",
+  );
+  static const TextStyle _lightScreenHeading2TextStyle = TextStyle(
+    fontSize: 16.0,
+    fontWeight: FontWeight.normal,
     color: _lightPrimaryColor,
     fontFamily: "Merriweather",
   );

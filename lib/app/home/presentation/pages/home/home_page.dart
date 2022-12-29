@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import '../../../../../dependency_container.dart';
+import '../../../presentation/bloc/rick_and_morty_bloc_state_manage.dart';
+import 'home_view.dart';
 
-import '../../../../dependency_container.dart';
-import '../bloc/rick_and_morty_bloc.dart';
-import '../bloc/rick_and_morty_bloc_event.dart';
-import 'rick_and_morty_list_page.dart';
-
+// ignore: use_key_in_widget_constructors
 class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {

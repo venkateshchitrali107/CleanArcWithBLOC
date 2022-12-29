@@ -8,6 +8,7 @@ RickAndMortyModel rickAndMortyModelFromJson(String str) =>
 String rickAndMortyModelToJson(RickAndMortyModel data) =>
     json.encode(data.toJson());
 
+// ignore: must_be_immutable
 class RickAndMortyModel extends RickAndMorty {
   RickAndMortyModel({
     required this.id,
@@ -25,9 +26,17 @@ class RickAndMortyModel extends RickAndMorty {
           status: status,
         );
 
+  @override
+  // ignore: overridden_fields
   final String id;
+  @override
+  // ignore: overridden_fields
   final String name;
+  @override
+  // ignore: overridden_fields
   final String status;
+  @override
+  // ignore: overridden_fields
   final String species;
   String? type;
   String? gender;

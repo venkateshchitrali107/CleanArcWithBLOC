@@ -1,14 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../../../dependency_container.dart';
-import '../bloc/rick_and_morty_bloc.dart';
-import '../bloc/rick_and_morty_bloc_event.dart';
-import '../bloc/rick_and_morty_bloc_state.dart';
-import '../widgets/bottom_tile_loader.dart';
-import '../widgets/rick_and_morty_list_tile.dart';
+import '../../../../../dependency_container.dart';
+import '../../bloc/rick_and_morty_bloc_state_manage.dart';
+import '../../widgets/bottom_tile_loader.dart';
+import '../../widgets/rick_and_morty_list_tile.dart';
 
+// ignore: use_key_in_widget_constructors
 class RickAndMortyListPage extends StatefulWidget {
   @override
   State<RickAndMortyListPage> createState() => _RickAndMortyListPageState();
@@ -168,6 +166,7 @@ class _RickAndMortyListPageState extends State<RickAndMortyListPage> {
     );
   }
 
+  // ignore: non_constant_identifier_names
   SizedBox SearchBar(RickAndMoryBlocState state) {
     return SizedBox(
       height: 70,
