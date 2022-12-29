@@ -1,6 +1,8 @@
 # clean_arc_bloc
 
 A Flutter project build in Clean Architecture with BLOC as state management.
+Flutter version : Flutter (Channel stable, 3.0.2)
+Dart version : Dart version 2.17.3
 
 ## Screen shots of the app
 
