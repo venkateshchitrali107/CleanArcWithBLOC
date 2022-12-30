@@ -23,7 +23,7 @@ class LocalDatasourceImpl implements LocalDatasource {
         } else if (params.filterType.toLowerCase() == "status") {
           res = await db.getFilteredStatus(params.searchKey.trim());
         } else if (params.filterType.toLowerCase() == "species") {
-          res = await db.getFilteredStatus(params.searchKey.trim());
+          res = await db.getFilteredSpecies(params.searchKey.trim());
         }
       } else {
         final offset = ((params.pageNumber - 1) * pageSize);
