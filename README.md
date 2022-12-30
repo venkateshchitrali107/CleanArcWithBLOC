@@ -23,6 +23,5 @@ Dart version : Dart version 2.17.3
 APK to try.
 
 
-[app-release.apk.zip](https://github.com/venkateshchitrali107/CleanArcWithBLOC/files/10318443/app-release.apk.zip)
-
+[app-release.apk.zip](https://github.com/venkateshchitrali107/CleanArcWithBLOC/files/10323294/app-release.apk.zip)
 
