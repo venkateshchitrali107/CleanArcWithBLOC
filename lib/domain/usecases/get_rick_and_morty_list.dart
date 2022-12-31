@@ -1,8 +1,8 @@
-import '../../data/model/rick_and_morty_model.dart';
 import 'package:dartz/dartz.dart';
 
 import '../../../../core/error/failure.dart';
 import '../../../../core/usecases/usecases.dart';
+import '../../data/model/rick_and_morty_model.dart';
 import '../../data/reposistory/rick_and_morty_repo_impl.dart';
 
 class GetRickAndMortyList implements Usecases<List<RickAndMortyModel>, Params> {

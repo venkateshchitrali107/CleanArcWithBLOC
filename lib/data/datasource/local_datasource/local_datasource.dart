@@ -1,11 +1,11 @@
 // import 'db.dart';
-import 'package:clean_arc_bloc/app/home/data/datasource/local_datasource/db.dart';
 
 import '../../../../../core/error/failure.dart';
 import 'package:flutter/foundation.dart';
 
 import '../../../../../core/usecases/usecases.dart';
 import '../../model/rick_and_morty_model.dart';
+import 'db.dart';
 
 abstract class LocalDatasource {
   Future<List<RickAndMortyModel>> getRickAndMortyList(Params params);

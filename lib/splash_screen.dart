@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'app/home/presentation/pages/home/home_page.dart';
+import 'presentation/pages/home/home_view.dart';
 
 // ignore: use_key_in_widget_constructors
 class SplashScreen extends StatefulWidget {

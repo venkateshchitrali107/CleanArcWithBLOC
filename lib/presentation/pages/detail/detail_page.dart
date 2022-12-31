@@ -1,5 +1,6 @@
-import '../../../data/model/rick_and_morty_model.dart';
 import "package:flutter/material.dart";
+
+import '../../../data/model/rick_and_morty_model.dart';
 
 class UserDetail extends StatelessWidget {
   final RickAndMortyModel user;
