@@ -73,8 +73,8 @@ class RemoteDatasourceImpl implements RemoteDatasource {
             currentElement,
           ),
         );
-        await db.insert(
-          RickAndMortyModelLocalData.fromJson(
+        db.saveData(
+          RickAndMortyModelLocal.fromJson(
             currentElement,
           ),
         );
