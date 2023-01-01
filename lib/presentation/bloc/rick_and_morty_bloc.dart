@@ -123,6 +123,9 @@ class RickAndMortyBLOC
         }
       },
     );
+  }
+
+  setupNetworkListner() {
     networkSub = networkInfo.onNewDataStream.listen(
       (updatedStatus) async {
         isLoading = false;

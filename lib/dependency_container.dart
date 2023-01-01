@@ -45,7 +45,7 @@ void init() {
       () => RickAndMortyBLOC(
         listUseCase: serviceLocator<GetRickAndMortyList>(),
         networkInfo: serviceLocator<NetworkInfoImpl>(),
-      ),
+      )..setupNetworkListner(),
     );
   } catch (e) {
     if (kDebugMode) print(e.toString());

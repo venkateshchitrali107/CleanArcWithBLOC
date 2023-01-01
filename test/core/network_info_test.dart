@@ -8,6 +8,7 @@ import 'network_info_test.mocks.dart';
 
 @GenerateMocks([NetworkInfoImpl])
 void main() {
+  // ignore: non_constant_identifier_names
   late MockNetworkInfoImpl SUT;
   setUp(() {
     SUT = MockNetworkInfoImpl();

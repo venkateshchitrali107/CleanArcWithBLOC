@@ -9,6 +9,7 @@ import 'remote_datasource_test.mocks.dart';
 
 @GenerateMocks([RemoteDatasourceImpl])
 void main() {
+  // ignore: non_constant_identifier_names
   late MockRemoteDatasourceImpl SUT;
   List<RickAndMortyModel> mockData = [
     RickAndMortyModel(

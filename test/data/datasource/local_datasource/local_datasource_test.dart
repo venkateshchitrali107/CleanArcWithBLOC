@@ -9,6 +9,7 @@ import 'local_datasource_test.mocks.dart';
 
 @GenerateMocks([LocalDatasourceImpl])
 void main() {
+  // ignore: non_constant_identifier_names
   late MockLocalDatasourceImpl SUT;
   List<RickAndMortyModel> mockData = [
     RickAndMortyModel(
