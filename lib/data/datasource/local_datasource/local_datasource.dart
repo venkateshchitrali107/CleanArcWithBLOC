@@ -1,6 +1,6 @@
-import '../../../../../core/error/failure.dart';
 import 'package:flutter/foundation.dart';
 
+import '../../../../../core/error/failure.dart';
 import '../../../../../core/usecases/usecases.dart';
 import '../../model/rick_and_morty_model.dart';
 import 'db.dart';

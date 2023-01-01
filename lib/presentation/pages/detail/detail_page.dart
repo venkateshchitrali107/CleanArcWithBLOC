@@ -1,6 +1,8 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import "package:flutter/material.dart";
 
 import '../../../data/model/rick_and_morty_model.dart';
+import '../../widgets/bottom_tile_loader.dart';
 
 class UserDetail extends StatelessWidget {
   final RickAndMortyModel user;
@@ -25,11 +27,18 @@ class UserDetail extends StatelessWidget {
               child: CircleAvatar(
                 radius: 105,
                 backgroundColor: Theme.of(context).primaryColor,
-                child: CircleAvatar(
-                  radius: 100,
-                  backgroundImage: NetworkImage(
-                    user.image ?? "",
-                  ),
+                child: CachedNetworkImage(
+                  imageUrl: user.image ?? "",
+                  imageBuilder: (context, imageProvider) {
+                    return CircleAvatar(
+                      radius: 100,
+                      backgroundImage: imageProvider,
+                    );
+                  },
+                  placeholder: (_, __) {
+                    return const BottomLoader();
+                  },
+                  errorWidget: _error,
                 ),
               ),
             ),
@@ -53,6 +62,14 @@ class UserDetail extends StatelessWidget {
             ),
           ],
         ),
+      ),
+    );
+  }
+
+  Widget _error(BuildContext context, String url, dynamic error) {
+    return const Center(
+      child: Icon(
+        Icons.error,
       ),
     );
   }

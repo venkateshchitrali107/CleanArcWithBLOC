@@ -3,7 +3,6 @@ import 'package:clean_arc_bloc/core/network/network_info.dart';
 import 'package:clean_arc_bloc/data/model/rick_and_morty_model.dart';
 import 'package:clean_arc_bloc/domain/usecases/get_rick_and_morty_list.dart';
 import 'package:clean_arc_bloc/presentation/bloc/rick_and_morty_bloc_state_manage.dart';
-import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:dartz/dartz.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';

@@ -1,9 +1,10 @@
-import 'splash_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'core/theme/app_theme.dart';
+
 import 'core/error/simple_bloc_observer.dart';
+import 'core/theme/app_theme.dart';
 import 'dependency_container.dart' as dc;
+import 'splash_screen.dart';
 
 void main() {
   dc.init();
