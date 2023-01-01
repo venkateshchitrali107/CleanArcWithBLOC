@@ -1,8 +1,9 @@
 import 'dart:async';
-import '../../../../core/network/network_info.dart';
+
 import 'package:flutter/foundation.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../../../core/network/network_info.dart';
 import '../../../../core/usecases/usecases.dart';
 import '../../../../dependency_container.dart';
 import '../../domain/usecases/get_rick_and_morty_list.dart';

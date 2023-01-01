@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+
 import '../../../../../dependency_container.dart';
 import '../../../presentation/bloc/rick_and_morty_bloc_state_manage.dart';
 import 'home_view.dart';

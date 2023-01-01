@@ -1,13 +1,13 @@
-import 'app/home/data/datasource/local_datasource/db.dart';
-import 'app/home/data/datasource/local_datasource/local_datasource.dart';
-import 'core/network/network_info.dart';
 import 'package:flutter/foundation.dart';
 import 'package:get_it/get_it.dart';
 
-import 'app/home/data/datasource/remote_datasource/remote_datasource.dart';
-import 'app/home/data/reposistory/rick_and_morty_repo_impl.dart';
-import 'app/home/domain/usecases/get_rick_and_morty_list.dart';
-import 'app/home/presentation/bloc/rick_and_morty_bloc.dart';
+import 'core/network/network_info.dart';
+import 'data/datasource/local_datasource/db.dart';
+import 'data/datasource/local_datasource/local_datasource.dart';
+import 'data/datasource/remote_datasource/remote_datasource.dart';
+import 'data/reposistory/rick_and_morty_repo_impl.dart';
+import 'domain/usecases/get_rick_and_morty_list.dart';
+import 'presentation/bloc/rick_and_morty_bloc_state_manage.dart';
 
 final GetIt serviceLocator = GetIt.instance;
 
